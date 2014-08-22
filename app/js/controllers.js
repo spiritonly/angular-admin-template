@@ -3,7 +3,11 @@
 /* Controllers */
 
 angular.module('angularAdmin')
-    .controller('DashbaordCtrl', function($scope) {
+    .controller('DashbaordCtrl', ['$scope', 'contentHeader', '$window', function($scope, contentHeader, $window) {
+        contentHeader.bigTitle = "Dashboard";
+        contentHeader.smallTitle = "Control Panel";
+        $scope.header = contentHeader;
+
         $scope.salesChart = {
             resize: true,
             colors: ["#3c8dbc", "#f56954", "#00a65a"],
@@ -66,4 +70,34 @@ angular.module('angularAdmin')
         $scope.emailContent = "send me an email!";
 
         $scope.date = new Date();
+
+        $scope.dateRangePickerOpts = {
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
+                'Last 7 Days': [moment().subtract('days', 6), moment()],
+                'Last 30 Days': [moment().subtract('days', 29), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+            },
+            startDate: moment().subtract('days', 29),
+            endDate: moment()
+        };
+
+        $scope.onDateChange = function(start, end){
+            alert($window.moment(start).format('MMMM D, YYYYY')
+            + ' - ' + $window.moment(end).format('MMMM D, YYYY'));
+        };
+    }]).controller('MenuCtrl', function($scope, $state) {
+        $scope.menus = [{
+            selected: true,
+            fontIcon: "fa fa-dashboard",
+            title: "dashboard",
+            url: $state.href("index.page", {page: "dashboard"})
+        },{
+            selected: false,
+            fontIcon: "fa fa-th",
+            title: "widgets",
+            url: $state.href("index.page", {page: "widgets"})
+        }];
     });
