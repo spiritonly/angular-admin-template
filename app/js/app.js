@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularAdmin', [
-    'ui.router', 'ChartAngular', 'ui.bootstrap'
+    'ui.router', 'ChartAngular', 'ui.bootstrap', 'ui.knob'
 ]).config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise('/pages/dashboard');

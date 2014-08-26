@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('angularAdmin')
-    .controller('DashbaordCtrl', ['$scope', 'contentHeader', '$window', function($scope, contentHeader, $window) {
+    .controller('DashbaordCtrl', ['$scope', 'contentHeader', function($scope, contentHeader) {
         contentHeader.bigTitle = "Dashboard";
         contentHeader.smallTitle = "Control Panel";
         $scope.header = contentHeader;
@@ -85,8 +85,18 @@ angular.module('angularAdmin')
         };
 
         $scope.onDateChange = function(start, end){
-            alert($window.moment(start).format('MMMM D, YYYYY')
-            + ' - ' + $window.moment(end).format('MMMM D, YYYY'));
+            alert(moment(start).format('MMMM D, YYYYY')
+            + ' - ' + moment(end).format('MMMM D, YYYY'));
+        };
+
+        $scope.mailOrders = 20;
+        $scope.online = 50;
+        $scope.inStore = 70;
+        $scope.knobOptions = {
+            'width': 60,
+            'height': 60,
+            'readOnly': true,
+            'fgColor': "#39CCCC"
         };
     }]).controller('MenuCtrl', function($scope, $state) {
         $scope.menus = [{
